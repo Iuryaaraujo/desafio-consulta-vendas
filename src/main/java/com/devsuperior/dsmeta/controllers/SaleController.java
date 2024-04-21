@@ -1,6 +1,8 @@
 package com.devsuperior.dsmeta.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,15 +25,15 @@ public class SaleController {
 		return ResponseEntity.ok(dto);
 	}
 
-	@GetMapping(value = "/report")
-	public ResponseEntity<?> getReport() {
-		// TODO
-		return null;
+	@GetMapping(value = "/report") //relatório
+	public ResponseEntity<Page<SaleMinDTO>> getReport(Pageable pageable) {
+		Page<SaleMinDTO> dto = service.getReport(pageable);
+		return ResponseEntity.ok(dto);
 	}
 
-	@GetMapping(value = "/summary")
-	public ResponseEntity<?> getSummary() {
-		// TODO
-		return null;
+	@GetMapping(value = "/summary") //resumo
+	public ResponseEntity<Page<SaleMinDTO>> getSummary(Pageable pageable) {
+		Page<SaleMinDTO> dtos = service.getSummary(pageable);
+		return ResponseEntity.ok(dtos);
 	}
 }
